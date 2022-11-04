@@ -131,7 +131,19 @@ function Start() {
     </section>
   );
 }
-
+function sendData(score){
+  console.log("...sendint score to server...." + score)
+  fetch(process.env.REACT_APP_API_URL, {
+    method: "POST",
+    body : JSON.stringify({"score" : score}),
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      Accept: "*/*",
+      
+    },
+  }).then((data) =>  data.json());
+}
 function Finish() {
   const { chosenAnswers } = useContext(Store);
   const textCompleted = (
@@ -141,14 +153,16 @@ function Finish() {
         You scored {calculateResult(correctAnswers, chosenAnswers)} out of{" "}
         {totalQuestions}
       </h4>
-      <Button text="start over" func={() => window.location.reload()} />
+      <Button text="start over" func={() => {sendData(calculateResult(correctAnswers, chosenAnswers)); window.location.href = "/"}} />
     </Fragment>
   );
+
 
   const textIncomplete = (
     <Fragment>
       <h4>Opps, looks like you haven't answered all the questions</h4>
       <p>Scroll up to see which questions you've missed out </p>
+      
     </Fragment>
   );
 
@@ -156,7 +170,7 @@ function Finish() {
    * this variable counts the length with those filtered out
    */
   const answeredQuestions = chosenAnswers.filter(ar => ar !== undefined).length;
-
+  console.log(chosenAnswers , answeredQuestions, totalQuestions)
   return (
     <section className="fullpage-center" id="finish">
       {answeredQuestions === totalQuestions ? textCompleted : textIncomplete}
