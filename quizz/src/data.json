@@ -1,0 +1,22 @@
+{
+    "response_code": 0,
+    "results": [
+      {
+        "category": "histoire",
+        "type": "multiple",
+        "difficulty": "easy",
+        "question": "Quelle est la couleur du cheval blanc d henry IV ?",
+        "correct_answer": "blanc",
+        "incorrect_answers": [ "vert", "oui", "left fragment"]
+      },
+      {
+        "category": "biologie",
+        "type": "boolean",
+        "difficulty": "easy",
+        "question": "Quelle est la difference entre un pigeon ?",
+        "correct_answer": "false",
+        "incorrect_answers": ["True"]
+      }
+    ]
+  }
+  
